@@ -27,10 +27,10 @@ public class DizionarioModel {
 			
 		
 		
-		for(String s:elencoParole){	
-			
+		for(String s:elencoParole){			
 			for(String word:parDao.trovaParoleSimili(jolly(s))){
-				wordGraph.addEdge(s, word);
+				if((!wordGraph.containsEdge(s, word))&&(word.compareTo(s)!=0))
+					wordGraph.addEdge(s, word);				
 			}
 			System.out.println(s);
 		}
