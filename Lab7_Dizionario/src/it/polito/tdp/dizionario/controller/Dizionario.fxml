@@ -1,7 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
-	
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
-	
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polito.tdp.dizionario.controller.DizionarioController">
-	<!-- TODO Add Nodes -->
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polito.tdp.dizionario.controller.DizionarioController">
+   <center>
+      <VBox spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox spacing="20.0">
+               <children>
+                  <Label prefHeight="17.0" prefWidth="159.0" text="Inserire il numero di lettere :" />
+                  <TextField fx:id="txtNumero" alignment="CENTER" />
+               </children>
+            </HBox>
+            <HBox spacing="20.0">
+               <children>
+                  <Label text="Inserire una parola da cercare:" />
+                  <TextField fx:id="txtParola" />
+               </children>
+            </HBox>
+            <HBox spacing="30.0">
+               <children>
+                  <Button fx:id="btnGenera" mnemonicParsing="false" onAction="#doGenera" text="Genera Grafo" />
+                  <Button fx:id="btnTrova" mnemonicParsing="false" onAction="#doTrova" text="Trova vicini" />
+                  <Button fx:id="btnConnessi" mnemonicParsing="false" onAction="#doConnessi" text="Trova tutti i connessi" />
+               </children>
+            </HBox>
+            <TextArea fx:id="txtOutput" prefHeight="200.0" prefWidth="200.0" />
+            <HBox alignment="TOP_RIGHT">
+               <children>
+                  <Button fx:id="btnReset" mnemonicParsing="false" onAction="#doReset" text="Reset" />
+               </children>
+            </HBox>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </BorderPane.margin>
+      </VBox>
+   </center>
+   <top>
+      <Label text="Lab7_Dizionario" BorderPane.alignment="CENTER" />
+   </top>
 </BorderPane>
