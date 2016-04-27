@@ -56,6 +56,7 @@ public List<String> trovaParoleSimili(List<String>temp){
 				
 				st.setString(1,s);
 				
+				
 				ResultSet res=st.executeQuery();
 				
 				while(res.next()){

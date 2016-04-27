@@ -11,6 +11,7 @@ import it.polito.tdp.dizionario.db.ParolaDAO;
 public class DizionarioModel {
 	
 	
+	int i=0;
 	private List<String>elencoParole=new ArrayList<String>();
 	ParolaDAO parDao=new ParolaDAO();
 	protected SimpleGraph<String, DefaultEdge> wordGraph = new SimpleGraph<String, DefaultEdge>(DefaultEdge.class);
@@ -22,20 +23,22 @@ public class DizionarioModel {
 		for(String s:elencoParole)
 			wordGraph.addVertex(s);	
 		
-		
+		System.out.println(wordGraph.vertexSet().size());
 	
 			
 		
 		
 		for(String s:elencoParole){			
 			for(String word:parDao.trovaParoleSimili(jolly(s))){
+				i++;
 				if((!wordGraph.containsEdge(s, word))&&(word.compareTo(s)!=0))
 					wordGraph.addEdge(s, word);				
 			}
 			System.out.println(s);
 		}
 		
-		System.out.println(wordGraph.edgeSet());
+		System.out.println(i);
+		System.out.println(wordGraph.edgeSet().size());
 		
 	}
 	
