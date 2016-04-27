@@ -68,7 +68,7 @@ public class DizionarioController {
 
     @FXML
     void doReset(ActionEvent event) {
-
+    	diz.clear();
     }
 
     @FXML
