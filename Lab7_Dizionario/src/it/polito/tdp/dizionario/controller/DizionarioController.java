@@ -1,6 +1,8 @@
 package it.polito.tdp.dizionario.controller;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import it.polito.tdp.dizionario.model.DizionarioModel;
@@ -47,6 +49,19 @@ public class DizionarioController {
 
     @FXML
     void doConnessi(ActionEvent event) {
+    	txtOutput.clear();
+    	String s=txtParola.getText();
+    	if(s==null||s.trim().compareTo("")==0){
+    		txtOutput.setText("Formato parola non valido");
+			return;    		    		
+    	}
+    	if(!s.matches("[a-zA-Z]+")){
+			txtOutput.setText("Formato parola non valido");
+			return;
+		}
+    	List<String> temp=new ArrayList<String>(diz.trovaProfondita(s));
+    	for(String word:temp)
+    		txtOutput.appendText(word+"\n");
 
     }
 
@@ -61,19 +76,37 @@ public class DizionarioController {
     		txtOutput.setText("Inserisci un numero di lettere valido");
     		return;
     	}
-    	if(i!=-1)
+    	if(i!=-1){
     		diz.loadWords(i);
+    		 btnTrova.setDisable(false);
+    	     btnConnessi.setDisable(false);
+    	}
 
     }
 
     @FXML
     void doReset(ActionEvent event) {
     	diz.clear();
+    	txtOutput.clear();
+    	txtParola.clear();
+    	txtNumero.clear();
     }
 
     @FXML
     void doTrova(ActionEvent event) {
-
+    	txtOutput.clear();
+    	String s=txtParola.getText();
+    	if(s==null||s.trim().compareTo("")==0){
+    		txtOutput.setText("Formato parola non valido");
+			return;    		    		
+    	}
+    	if(!s.matches("[a-zA-Z]+")){
+			txtOutput.setText("Formato parola non valido");
+			return;
+		}
+    	List<String> temp=new ArrayList<String>(diz.trovaVicini(s));
+    	for(String word:temp)
+    		txtOutput.appendText(word+"\n");
     }
 
     @FXML
@@ -85,6 +118,8 @@ public class DizionarioController {
         assert btnConnessi != null : "fx:id=\"btnConnessi\" was not injected: check your FXML file 'Dizionario.fxml'.";
         assert txtOutput != null : "fx:id=\"txtOutput\" was not injected: check your FXML file 'Dizionario.fxml'.";
         assert btnReset != null : "fx:id=\"btnReset\" was not injected: check your FXML file 'Dizionario.fxml'.";
+        btnTrova.setDisable(true);
+        btnConnessi.setDisable(true);
 
     }
 }

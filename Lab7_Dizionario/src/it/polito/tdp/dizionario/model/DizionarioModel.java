@@ -3,8 +3,12 @@ package it.polito.tdp.dizionario.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jgrapht.Graphs;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
+import org.jgrapht.traverse.BreadthFirstIterator;
+import org.jgrapht.traverse.DepthFirstIterator;
+import org.jgrapht.traverse.GraphIterator;
 
 import it.polito.tdp.dizionario.db.ParolaDAO;
 
@@ -71,7 +75,7 @@ public class DizionarioModel {
 	public void graphRAM(){
 		for(String s1:elencoParole){			
 			for(String s2:elencoParole){
-				if((!wordGraph.containsEdge(s1, s2))&&(this.checkWord(s1, s2)!=-1))
+				if((!wordGraph.containsEdge(s1, s2))&&(this.checkWord(s1, s2)==1))
 					wordGraph.addEdge(s1, s2);				
 			}			
 		}
@@ -94,6 +98,30 @@ public class DizionarioModel {
 			}
 		}
 		return res;
+	}
+	
+	public List<String> trovaVicini(String word){
+		List<String>temp=new ArrayList<String>();
+		if(!wordGraph.containsVertex(word)){
+			return null;
+		}
+		else{
+			for(String p:Graphs.neighborListOf(wordGraph, word))
+				temp.add(p);
+		}
+		return temp;
+		
+		
+	}
+	
+	public List<String> trovaProfondita(String word){
+		List<String>temp=new ArrayList<String>();
+		GraphIterator<String,DefaultEdge> visit = new DepthFirstIterator<String,DefaultEdge>(wordGraph,word);
+		while(visit.hasNext()){
+			temp.add(visit.next());
+		}
+		System.out.println(temp.size());
+		return temp;
 	}
 	
 
